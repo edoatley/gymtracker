@@ -8,7 +8,7 @@ class WorkoutTest {
     @Test
     fun testSimpleWorkoutToString() {
         val exercise1 = Exercise("Running", EffortLevel.MODERATE, TimeTaken(0, 33, 28))
-        val workout = Workout(ZonedDateTime.now(), "Reading", listOf(exercise1))
+        val workout = Workout( ZonedDateTime.now(), "Reading", mutableListOf(exercise1))
         val workoutString = workout.toString()
 
         assert(workoutString.contains("Reading")) { "Location Reading was missing from toString(): $workoutString" }

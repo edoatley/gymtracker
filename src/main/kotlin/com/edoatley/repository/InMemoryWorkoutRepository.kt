@@ -8,9 +8,7 @@ import io.smallrye.mutiny.Uni
 import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
-class InMemoryWorkoutRepository : IWorkoutRepository {
-
-    val workouts: MutableMap<String, Workout> = HashMap()
+class InMemoryWorkoutRepository(val workouts: MutableMap<String, Workout> = HashMap()) : IWorkoutRepository {
 
     override fun findAll(): Multi<Workout> {
         return Multi.createFrom().iterable((workouts.values))
@@ -18,11 +16,11 @@ class InMemoryWorkoutRepository : IWorkoutRepository {
 
     override fun save(workout: Workout): Uni<Workout> {
         workouts[workout.id] = workout
-        return Uni.createFrom().emitter {(workouts[workout.id])}
+        return Uni.createFrom().item(workouts[workout.id])
     }
 
     override fun get(id: String): Uni<Workout> {
-        return Uni.createFrom().emitter {(workouts[id])}
+        return Uni.createFrom().item(workouts[id])
     }
 
     override fun addExercise(id: String, exercise: Exercise) {

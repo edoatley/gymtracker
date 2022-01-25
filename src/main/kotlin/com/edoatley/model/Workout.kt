@@ -4,10 +4,10 @@ import java.time.ZonedDateTime
 import java.util.*
 
 class Workout (
-    val id: String = UUID.randomUUID().toString(),
     val startTime: ZonedDateTime,
     val location: String,
-    val exercises: MutableList<Exercise>
+    val exercises: MutableList<Exercise>,
+    val id: String = UUID.randomUUID().toString()
 ) {
 
     override fun toString(): String {
